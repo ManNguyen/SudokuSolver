@@ -1,6 +1,5 @@
 
 
-
 testGrid2 = [[5, 3, 4, 6, 7, 8, 9, 1, 2],
              [6, 7, 2, 1, 9, 5, 3, 4, 8],
              [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -11,62 +10,73 @@ testGrid2 = [[5, 3, 4, 6, 7, 8, 9, 1, 2],
              [2, 8, 7, 4, 1, 9, 6, 3, 5],
              [3, 4, 5, 2, 8, 6, 1, 7, 9]]
 
+grid = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
+        [5, 2, 0, 0, 0, 0, 0, 0, 0],
+        [0, 8, 7, 0, 0, 0, 0, 3, 1],
+        [0, 0, 3, 0, 1, 0, 0, 8, 0],
+        [9, 0, 0, 8, 6, 3, 0, 0, 5],
+        [0, 5, 0, 0, 9, 0, 6, 0, 0],
+        [1, 3, 0, 0, 0, 0, 2, 5, 0],
+        [0, 0, 0, 0, 0, 0, 0, 7, 4],
+        [0, 0, 5, 2, 0, 6, 3, 0, 0]]
 
 
 
 
-
-def checkUnique(row) ->bool:
+cNumSet = [1, 2, 3, 4, 5, 6, 7, 8,9]
+def checkUnique(row) -> bool:
     numSet = set([])
 
     for num in row:
         if num in numSet:
             print("repeated values")
-            print("\"",row,"\"")
+            print("\"", row, "\"")
             return False
         numSet.add(num)
 
-    for i in range(1,10):
+    for i in range(1, 10):
         if i not in numSet:
             print("missing value")
-            print("\"",row,"\"")
+            print("\"", row, "\"")
             print(i)
 
 
-def isValid(grid) ->bool:
+def isValid(grid) -> bool:
 
-    if(len(grid) != 9) :
+    if(len(grid) != 9):
         print("invalid number of rows")
         return False
 
     for row in grid:
-        if(len(row) != 9) :
+        if(len(row) != 9):
             print("invalid number of cols")
-            print("\"",row,"\"")
+            print("\"", row, "\"")
             return False
-
-
 
     print("checking rows...")
     for row in grid:
-      if(checkUnique(row) == False): return False
+      if(checkUnique(row) == False):
+          return False
 
     print("checking cols...")
     for row in rotateGrid(grid):
-      if(checkUnique(row) == False): return False
+      if(checkUnique(row) == False):
+          return False
 
     print("checking sections...")
     for row in unboxGrid(grid):
-      if(checkUnique(row) == False): return False
-
+      if(checkUnique(row) == False):
+          return False
 
     return True
+
 
 def rotateGrid(grid):
     rGrid = []
     for i in range(9):
-        rGrid.append([x[i] for  x in grid])
+        rGrid.append([x[i] for x in grid])
     return rGrid
+
 
 def unboxGrid(grid):
     rGrid = [
@@ -84,7 +94,7 @@ def unboxGrid(grid):
         secY = (idy//3)
         for idx, cell in enumerate(row):
             secX = (idx//3)
-            rowIndex= secX+3*secY
+            rowIndex = secX+3*secY
             rGrid[rowIndex].append(cell)
     return rGrid
 
@@ -93,21 +103,48 @@ def printSudoku(grid):
     vline = '_______________________________'
     print(vline)
     for idx, row in enumerate(grid):
-        print("|",end = '')
+        print("|", end='')
         for idy, cell in enumerate(row):
-            if cell != 0: print('',cell,'',end = '')
-            else: print('   ',end = '')
-            if idy%3 == 2:  print("|",end = '')
+            if cell != 0:
+                print('', cell, '', end='')
+            else:
+                print('   ', end='')
+            if idy % 3 == 2:
+                print("|", end='')
         print("")
-        if idx%3 == 2:  print(vline)
+        if idx % 3 == 2:
+            print(vline)
+
+
+def possibleVal(row,cArr):
+    nPSet= []
+    for i in cArr:
+        if i not in row : nPSet.append(i)
+    return nPSet
+
+def solveGrid(grid):
+
+    rGrid = rotateGrid(grid)
+    uGrid = unboxGrid(grid)
+
+    for y, row in enumerate(grid):
+      secY = (y//3)
+      for x, cell in enumerate(row):
+        
+        if cell == 0:
+            candidate = possibleVal(grid[y],cNumSet)
+            candidate = possibleVal(rGrid[x],candidate)
+            secX = (x//3)
+            boxndex = secX+3*secY
+            candidate = possibleVal(uGrid[boxndex],candidate)
+
+            print(candidate)
+        
+        # grid[y][x] = 1
 
 
 # printSudoku(testGrid2)
 # printSudoku(rotateGrid(testGrid2))
 # printSudoku(unboxGrid(testGrid2))
-
-
-
-print(isValid(solvedgrid))
-
-
+solveGrid(grid)
+printSudoku(grid)
