@@ -6,9 +6,11 @@ This repo is created to solve a 9x9 sudoku problem using Python
 
 ## Getting Started
 
-The Sudoku class will take in the [9][9] array as unsolved Sudoku, the unsolved cells need to be coded as 0
+The Sudoku class will take in the [9][9] array as unsolved Sudoku
 
-```
+The unsolved cells need to be coded as 0
+
+```{python}
 grid = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
         [5, 2, 0, 0, 0, 0, 0, 0, 0],
         [0, 8, 7, 0, 0, 0, 0, 3, 1],
@@ -25,7 +27,7 @@ function solve will try to solve it. And if it's solvable, the functio return Tr
 
 You can then extract the solved grid in property grid. You can also get the original(unsolved grid) in property origin. There're also function print and printOrigin to print the sudoku out nicely :)
 
-```
+```{python}
 
 solvable = sudoku.solve()
 
