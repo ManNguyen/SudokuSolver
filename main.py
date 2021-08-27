@@ -35,12 +35,14 @@ grid = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
 
 
 
-
-
-
 sudoku = Sudoku(grid)
 
-sudoku.solve()
+solvable = sudoku.solve()
+
+if(solvable):
+        print("grid solved")
+        sudoku.printOrigin()
+        sudoku.print()
 
 # cGrid = solveGrid(grid)
 # printSudoku(cGrid)
