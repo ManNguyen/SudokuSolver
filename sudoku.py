@@ -54,34 +54,6 @@ def cloneGrid(grid):
             r.append(nRow)
         return r
 
-def isValid(grid) -> bool:
-        if(len(grid) != 9):
-            print("invalid number of rows")
-            return False
-
-        for row in grid:
-            if(len(row) != 9):
-                print("invalid number of cols")
-                print("\"", row, "\"")
-                return False
-
-        print("checking rows...")
-        for row in grid:
-            if(checkUnique(row) == False):
-                
-                return False
-
-        print("checking cols...")
-        for row in rotateGrid(grid):
-            if(checkUnique(row) == False):
-                return False
-
-        print("checking sections...")
-        for row in unboxGrid(grid):
-            if(checkUnique(row) == False):
-                return False
-
-        return True
 cNumSet = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 class Sudoku:
 
@@ -158,7 +130,7 @@ class Sudoku:
         testX,testY =0,0
         cand = []
 
-    # GREEDY PART: validate and check for trivial cell
+    # GREEDY PART: check for impossible cases and check for easy to solve cells
         for y, row in enumerate(grid):
             secY = (y//3)
             for x, cell in enumerate(row):

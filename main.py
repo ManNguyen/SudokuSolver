@@ -34,6 +34,17 @@ grid = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
         [0, 0, 5, 2, 0, 6, 3, 0, 0]]
 
 
+hard = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [3, 0, 0, 0, 2, 0, 0, 9, 0],
+        [0, 7, 0, 0, 1, 0, 0, 0, 5],
+        [6, 0, 0, 0, 0, 0, 0, 0, 8],
+        [0, 0, 3, 2, 8, 0, 0, 0, 7],
+        [9, 0, 0, 0, 5, 0, 0, 0, 2],
+        [1, 0, 0, 0, 3, 0, 0, 4, 0],
+        [0, 0, 6, 0, 0, 1, 0, 5, 0],
+        [0, 0, 0, 6, 0, 8, 0, 0, 0]]
+
+
 
 sudoku = Sudoku(grid)
 
@@ -44,6 +55,15 @@ if(solvable):
         sudoku.printOrigin()
         sudoku.print()
 
+
+sudoku = Sudoku(hard)
+
+solvable = sudoku.solve()
+
+if(solvable):
+        print("grid solved")
+        sudoku.printOrigin()
+        sudoku.print()
 # cGrid = solveGrid(grid)
 # printSudoku(cGrid)
 
